@@ -9,26 +9,35 @@ var getElementsByClassName = function(className) {
   var outputNodes = [];
   var rootNode = document.body;
 
-  var checkerFunction = function() {
 
+
+
+
+  var checkerFunction = function(currentNode) {
+      // var currentNode;
+  if(currentNode.classList !== undefined) {
+    if(currentNode.classList.contains(className)) {
+      outputNodes.push(currentNode);
+      }
+    }
+
+    var child = currentNode.childNodes;
+    //checkerFunction(currentNode);
+
+
+    if(child) {
+        for (var i = 0; i < child.length; i++) {
+          var currentNode = child[i];
+          checkerFunction(currentNode);
+        }
+    }
   }
-  var childNodes = rootNode.childNodes;
 
-  console.log(rootNode.classList)
+  checkerFunction(rootNode);
 
-  if(rootNode.classList.contains(className)) {
-    outputNodes.push(rootNode);
-    checker = 1;
-  }
 
-  // if(childNodes) {
-  //   for(var i = 0; i < childNodes.length; i++) {
-  //     rootNode = childNodes[i];
-  //     return outputNodes.concat(getElementsByClassName(childNodes[i]));
-  //   }
-  // }
-
-  // if it has child node, recursion
-  // etElementsByClassName
+// checkerFunction
+// if it does have child
+// we call getElementsByClassName
   return outputNodes;
 };
